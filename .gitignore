@@ -1,3 +1,6 @@
 node_modules/
 .secret
 package-lock.json
+truffle/build/contracts/Migrations.json
+
+truffle/build/contracts/SmartKetplace.json
