@@ -12,4 +12,12 @@ export class SellComponent implements OnInit {
   ngOnInit() {
   }
 
+  cancel(): void {
+    document.location.href="/";
+  }
+
+  submit(): void {
+    
+  }
+
 }
