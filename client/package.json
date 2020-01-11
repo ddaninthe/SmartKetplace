@@ -20,8 +20,11 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "bootstrap": "^4.4.1",
+    "datatables.net-bs4": "^1.10.20",
+    "fortmatic": "^1.0.1",
     "jquery": "^3.4.1",
     "rxjs": "~6.4.0",
+    "truffle-contract": "^4.0.31",
     "tslib": "^1.10.0",
     "web3": "^1.2.4",
     "zone.js": "~0.9.1"

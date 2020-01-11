@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Web3Service } from './services/web3/web3.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'SmartKetplace';
+
+  constructor(private web3service : Web3Service) { }
 }

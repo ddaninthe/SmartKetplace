@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Web3Service } from '../services/web3/web3.service';
+import { House } from '../models/house.model';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private web3service: Web3Service) { }
 
   ngOnInit() {
+    this.web3service.getHouses()
+      .then((houses: House[]) => {
+        console.log(houses);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
-
 }

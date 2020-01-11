@@ -1,1 +1,19 @@
-<p>home works! Test</p>
+<h1>SmartKetplace</h1>
+
+<div class="content">
+    <div class="col-12 col-md-6 offset-md-3" *ngIf="houses">
+        <table class="hover">
+            <thead>
+                <tr>Area</tr>
+                <tr>Price</tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let house of houses">
+                    <th>{{house.area}}</th>
+                    <th>{{house.price}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12 col-md-6 offset-md-3" *ngIf="!houses">No houses.</div>
+</div>

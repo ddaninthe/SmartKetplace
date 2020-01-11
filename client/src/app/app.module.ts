@@ -1,15 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { WindowRef } from './services/windowRef';
 
 // Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SellComponent } from './sell/sell.component';
 
+// Services
+import { Web3Service } from './services/web3/web3.service';
+
 //Définition des routes
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'houses', component: HomeComponent },
+  { path: 'houses/:houseId', component: HomeComponent },
   { path: 'sell', component: SellComponent },
   { path: '**', redirectTo: '' } //Redirection à la page d'accueil pour routes invalides
 ]
@@ -22,9 +28,9 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes, { enableTracing: true })
+    RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [WindowRef, Web3Service],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
