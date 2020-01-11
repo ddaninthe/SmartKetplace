@@ -1,1 +1,40 @@
-<p>sell works!</p>
+<form class="offset-lg-2">
+    <div class="form-group row">
+      <label for="inputLocation" class="col-sm-2 col-form-label">Location</label>
+      <div class="col-sm-5">
+        <input type="text" class="form-control" id="inputLocation" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPrice" class="col-sm-2 col-form-label">Price</label>
+      <div class="col-sm-5">
+        <input type="number" class="form-control" id="inputPrice" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputArea" class="col-sm-2 col-form-label">Area (m²) </label>
+      <div class="col-sm-5">
+        <input type="number" class="form-control" id="inputArea" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputRoomCount" class="col-sm-2 col-form-label">Room number </label>
+      <div class="col-sm-5">
+        <input type="number" class="form-control" id="inputRoomCount" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
+      <div class="col-sm-5">
+        <textarea class="form-control" id="inputDescription" rows="4" required></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+      </div>
+      <div class="col-sm-6">
+      <button type="button" class="btn btn-light" (click)="cancel()" >Cancel</button>
+      </div>
+    </div>
+  </form>
