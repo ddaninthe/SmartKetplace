@@ -20,7 +20,9 @@ contract("SmartKeyplace", () => {
 		await instance.addHouse(_location2, _roomCount, _area, _price, _documents);
 		var results = await instance.getHouses();
 		var length = results.length;
-		console.log(results);
+		
+		assert.equal(2, length);
+		
 		var firstHouse = await instance.getHouse(0);
 		
 		assert.equal(_location, results[0].location);
