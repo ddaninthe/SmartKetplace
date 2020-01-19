@@ -33,7 +33,7 @@ contract SmartKetplace {
 
     // Achat d'une maison par une personne
     function buyHouse(uint _houseId, address payable _buyer) public onlyBuyer(_buyer) payable {
-        require(msg.value == getHousePrice(_houseId), "You must give the exact house price");
+        require(msg.value == 1 ether * getHousePrice(_houseId), "You must give the exact house price");
 
         // Transfert monétaire
         address payable oldOwner = houseToOwner[_houseId];
