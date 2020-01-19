@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { WindowRef } from './services/windowRef';
 
@@ -7,6 +8,7 @@ import { WindowRef } from './services/windowRef';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SellComponent } from './sell/sell.component';
+import { HouseComponent } from './house/house.component';
 
 // Services
 import { Web3Service } from './services/web3/web3.service';
@@ -15,7 +17,7 @@ import { Web3Service } from './services/web3/web3.service';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'houses', component: HomeComponent },
-  { path: 'houses/:houseId', component: HomeComponent },
+  { path: 'houses/:houseId', component: HouseComponent },
   { path: 'sell', component: SellComponent },
   { path: '**', redirectTo: '' } //Redirection à la page d'accueil pour routes invalides
 ]
@@ -24,10 +26,13 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    SellComponent
+    SellComponent,
+    HouseComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [WindowRef, Web3Service],

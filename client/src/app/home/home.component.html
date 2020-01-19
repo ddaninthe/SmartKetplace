@@ -1,11 +1,13 @@
 <h1>SmartKetplace</h1>
 
 <div class="content">
-    <div class="col-12 col-md-6 offset-md-3" *ngIf="houses">
+    <div class="col-12 col-md-6 offset-md-3" *ngIf="houses.length">
         <table class="hover">
             <thead>
-                <tr>Area</tr>
-                <tr>Price</tr>
+                <tr>
+                    <th>Area</th>
+                    <th>Price</th>
+                </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let house of houses">
@@ -15,5 +17,7 @@
             </tbody>
         </table>
     </div>
-    <div class="col-12 col-md-6 offset-md-3" *ngIf="!houses">No houses.</div>
+    <div class="col-12 col-md-6 offset-md-3" *ngIf="!houses.length">
+        No houses in the catalogue. You can be the first by <a href="#" routerLink="sell">clicking here</a> !
+    </div>
 </div>

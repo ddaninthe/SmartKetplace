@@ -1,40 +1,47 @@
-<form class="offset-lg-2">
+
+<div class="alert alert-success" role="alert" *ngIf="houseAdded">
+  Your house has been added to the catalogue !
+</div>
+
+<h3>List your house</h3>
+
+<form class="offset-lg-2" [formGroup]="houseForm" (ngSubmit)="submitForm(houseForm.value)">
     <div class="form-group row">
-      <label for="inputLocation" class="col-sm-2 col-form-label">Location</label>
+      <label for="location" class="col-sm-2 col-form-label">Location</label>
       <div class="col-sm-5">
-        <input type="text" class="form-control" id="inputLocation" required>
+        <input type="text" class="form-control" id="location" formControlName="location" required/>
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputPrice" class="col-sm-2 col-form-label">Price</label>
+      <label for="price" class="col-sm-2 col-form-label">Price (ETH)</label>
       <div class="col-sm-5">
-        <input type="number" class="form-control" id="inputPrice" required>
+        <input type="number" class="form-control" id="price" formControlName="price" required/>
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputArea" class="col-sm-2 col-form-label">Area (m²) </label>
+      <label for="area" class="col-sm-2 col-form-label">Area (m²) </label>
       <div class="col-sm-5">
-        <input type="number" class="form-control" id="inputArea" required>
+        <input type="number" class="form-control" id="area" formControlName="area" required/>
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputRoomCount" class="col-sm-2 col-form-label">Room number </label>
+      <label for="roomCount" class="col-sm-2 col-form-label">Room number </label>
       <div class="col-sm-5">
-        <input type="number" class="form-control" id="inputRoomCount" required>
+        <input type="number" class="form-control" id="roomCount" formControlName="roomCount" required/>
       </div>
     </div>
-    <div class="form-group row">
-      <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
+    <!--div class="form-group row">
+      <label for="description" class="col-sm-2 col-form-label">Description</label>
       <div class="col-sm-5">
-        <textarea class="form-control" id="inputDescription" rows="4" required></textarea>
+        <textarea class="form-control" id="description" rows="4" formControlName="description" required></textarea>
       </div>
-    </div>
-    <div class="form-group row">
+    </div-->
+    <div class="form-group row buttons">
       <div class="col-sm-6">
-        <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+        <button type="submit" class="btn btn-primary" [disabled]="submitted">Submit</button>
       </div>
       <div class="col-sm-6">
-      <button type="button" class="btn btn-light" (click)="cancel()" >Cancel</button>
+        <button type="button" class="btn btn-light" (click)="cancel()" >Cancel</button>
       </div>
     </div>
   </form>

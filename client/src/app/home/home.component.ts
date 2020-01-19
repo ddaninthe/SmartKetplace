@@ -9,12 +9,15 @@ import { House } from '../models/house.model';
 })
 export class HomeComponent implements OnInit {
 
+  private houses: Array<House> = [];
+
   constructor(private web3service: Web3Service) { }
 
   ngOnInit() {
     this.web3service.getHouses()
       .then((houses: House[]) => {
         console.log(houses);
+        this.houses = [...houses];
       })
       .catch(e => {
         console.log(e);

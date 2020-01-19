@@ -17,21 +17,20 @@ export class Web3Service {
 
   
   private smartContract;
-  private deployed;
 
-  userAddress: string;
+  private userAddress: string;
 
   constructor(private winRef: WindowRef) {
     this.fm = new Fortmatic(this.API_KEY, 'ropsten');
     this.web3 = new Web3(this.fm.getProvider());
 
     this.smartContract = new this.web3.eth.Contract(SmartContract_artifacts.abi, SmartContract_artifacts.networks[3].address);
+    console.log(this.smartContract);
+
   //  const tokenContractInstance = this.tokenContract.at(this.CONTRACT_ADDRESS);
 
     //this.SmartContract = contract(SmartContract_artifacts);
     //this.SmartContract.setProvider(this.web3.currentProvider);
-
-    console.log(this.smartContract);
 
     /*this.smartContract.deployed().then(instance => {
       this.deployed = instance;
@@ -39,20 +38,10 @@ export class Web3Service {
       console.log(instance);
     }).catch(e => {
       console.log(e);
-    });
-    
-    /*
-    if (typeof this.SmartContract.currentProvider.sendAsync !== "function") {
-      this.SmartContract.currentProvider.sendAsync = function () {
-        return this.SmartContract.currentProvider.send.apply(
-          this.SmartContract.currentProvider, arguments
-        );
-      };
-    }*/
+    });*/
 
     //const tokenContract = this.winRef.nativeWindow.web3.eth.contract(this.erc20TokenContractAbi);
     //this.smarketplace = tokenContract.at(this.CONTRACT_ADDRESS);
-
 
     // Request user login if needed, returns current user account address
     this.winRef.nativeWindow.web3.currentProvider.enable()
@@ -65,7 +54,18 @@ export class Web3Service {
       });
   }
 
+  getEvents() {
+    return this.smartContract.events;
+  }
+
+  // Add a house
+  addHouse(house: House): Promise<any> {
+    return this.smartContract.methods.addHouse(house.location, house.roomCount, house.area, 
+      house.price, house.documents).call({from: this.userAddress});
+  }
+
+  // Get all houses
   getHouses(): Promise<House[]> {
-    return this.smartContract.methods.houses().call();
+    return this.smartContract.methods.getHouses().call();
   }
 }
