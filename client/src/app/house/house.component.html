@@ -1,0 +1,52 @@
+<div class="alert alert-success" role="alert" *ngIf="houseBought">
+  You have successfully bought this house! You can see transaction details <a target="_blank"
+    href="https://ropsten.etherscan.io/address/{{userAddress}}">on etherscan</a>.
+</div>
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="waiting">
+  Waiting for the transaction completion...
+</div>
+
+<div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="transactionDenied">
+  You have cancelled the transaction.
+</div>
+<br />
+
+<div class="offset-sm-2 col-sm-8">
+  <h3>Details of house #{{houseId+1}}</h3>
+  <br />
+
+  <table class="table table-bordered" *ngIf="house">
+
+    <tbody>
+      <tr>
+        <th scope="row">Area</th>
+        <td>{{house.area}}m²</td>
+      </tr>
+      <tr>
+        <th scope="row">Location</th>
+        <td>{{house.location}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Number of Rooms</th>
+        <td>{{house.roomCount}} rooms</td>
+      </tr>
+      <tr>
+        <th scope="row">Price</th>
+        <td>{{house.price}} ETH</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="form-group row buttons">
+    <div class="col-6">
+      <button class="btn btn-light" (click)="back()">Back</button>
+    </div>
+    <div class="col-6" *ngIf="!isOwner">
+      <button class="btn btn-success" (click)="buyHouse()" [disabled]="disable">Buy Now !</button>
+    </div>
+    <div class="col-6 owner" *ngIf="isOwner">
+      You can't buy your own house.
+    </div>
+  </div>
+</div>
