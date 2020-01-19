@@ -43,7 +43,7 @@ contract SmartKetplace {
         houseToOwner[_houseId] = _buyer;
 
         // Appel de l'évènement
-        emit Transfer(oldOwner, _buyer, _houseId);
+        emit Transfer(_buyer, oldOwner, _houseId);
     }
 
     // Récupération de l'ensemble du catalogue

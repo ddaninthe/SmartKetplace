@@ -2,17 +2,21 @@
 
 <div class="content">
     <div class="col-12 col-md-6 offset-md-3" *ngIf="houses.length">
-        <table class="hover">
+        <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Area</th>
-                    <th>Price</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Area</th>
+                    <th scope="col">Price</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let house of houses">
-                    <th>{{house.area}}</th>
-                    <th>{{house.price}}</th>
+                <tr *ngFor="let house of houses; let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{house.area}}m²</td>
+                    <td>{{house.price}} ETH</td>
+                    <td><button class="btn btn-info" (click)="showDetails(i+1)">Details</button></td>
                 </tr>
             </tbody>
         </table>

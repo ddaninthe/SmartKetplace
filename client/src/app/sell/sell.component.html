@@ -1,6 +1,14 @@
 
 <div class="alert alert-success" role="alert" *ngIf="houseAdded">
-  Your house has been added to the catalogue !
+  Your house has been added to the catalogue ! House details <a href="#" routerLink="/houses/{{houseId}}">here</a>.
+</div>
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="waiting">
+  Waiting for the transaction completion...
+</div>
+
+<div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="transactionDenied">
+  You have cancelled the transaction.
 </div>
 
 <h3>List your house</h3>
@@ -41,7 +49,7 @@
         <button type="submit" class="btn btn-primary" [disabled]="submitted">Submit</button>
       </div>
       <div class="col-sm-6">
-        <button type="button" class="btn btn-light" (click)="cancel()" >Cancel</button>
+        <button type="button" class="btn btn-light" (click)="cancel()" >Back</button>
       </div>
     </div>
   </form>

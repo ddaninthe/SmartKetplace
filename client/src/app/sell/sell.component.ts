@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Web3Service } from '../services/web3/web3.service';
 import { House } from '../models/house.model';
@@ -12,44 +12,62 @@ import { House } from '../models/house.model';
 export class SellComponent implements OnInit {
 
   private houseAdded: Boolean;
-  private houseForm: any;
+  private transactionDenied: Boolean;
+  private houseForm: FormGroup;
   private submitted: Boolean;
+  private waiting: Boolean;
+  private houseId: number;
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private web3Service: Web3Service) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, private web3Service: Web3Service) {
+    this.web3Service.smartContract.events.NewHouse({}, 
+      (err, data) => {
+        if (err) {
+          console.log(err);
+        } else {
+          this.houseAdded = true;
+          this.houseId = Number.parseInt(data.returnValues.houseId) + 1;
+          this.houseForm.reset();
+        }
+      });
+   }
 
   ngOnInit() {
     this.houseAdded = false;
+    this.transactionDenied = false;
     this.submitted = false;
+    this.waiting = false;
 
     this.houseForm = this.formBuilder.group({
-      location: 'Paris 20ème',
-      price: 1,
-      area: 70,
-      roomCount: 3
+      location: '',
+      price: '',
+      area: '',
+      roomCount: ''
     });
-
-    // Web3js can't subscribe
-    /*
-    this.web3Service.getEvents().NewHouse({}, (err, houseId)=> {
-      if (err) {
-        console.log(err);
-      } else {
-        this.houseAdded = true;
-        setTimeout(() => this.router.navigate(['house/' + houseId]), 3000);
-      }
-    });*/
   }
 
   cancel(): void {
     this.router.navigate(['/']);
   }
 
+  navigate(): void {
+    this.router.navigate(['/houses/'])
+  }
+
   submitForm(houseFormValue: House): void {
     this.submitted = true;
     houseFormValue.documents = [];
-    this.web3Service.addHouse(houseFormValue).then((d) => {
-      console.log(d);
-    })
-    .catch(e => console.log(e));
+    this.waiting = true;
+    this.web3Service.addHouse(houseFormValue)
+      .then()
+      .catch(e => {
+        // User denied transaction
+        if (e.code == 4001) {
+          this.transactionDenied = true;
+        } else console.log(e);
+      })
+      .finally(() => {
+        this.waiting = false;
+        this.submitted = false;
+      });
   }
 }
